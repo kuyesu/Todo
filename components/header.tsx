@@ -1,18 +1,31 @@
-import React from 'react'
-import { View, Text, StyleSheet} from "react-native";
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
-function header({title}: any) {
+function header({ title }: any) {
   return (
     <View style={styles.main}>
-          <Text>{title}</Text>
+      <Text style={styles.text}>{title}</Text>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-    main: {
-        height: 60,
-        padding: 15,
+  main: {
+    marginTop: 60,
+    height: 40,
+        textAlign: "left",
+        paddingLeft: 5,
+
     },
-})
-export default header
+    text: {
+        position: "relative",
+        fontSize: 20,
+        paddingBotton: 10,
+        textAlign: "left",
+        color: "#154d56",
+        textTransform: "uppercase",
+        fontWeight: "900"
+
+    }
+});
+export default header;

@@ -3,23 +3,49 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput } from "react-nativ
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
-function AddItem({ item, addItem }: any) {
+const AddItem = ({ addItem }: any) => {
   const [text, setText] = useState("");
   const onChange = (textValue: any) => setText(textValue);
+
   return (
     <View>
-      <TextInput placeholder="Add Language" onChange={onChange} />
-      <TouchableOpacity style={styles.main} onPress={() => addItem(text)}>
-        <Text>Add Item</Text>
+      <TextInput
+        placeholder="Add Item..."
+        style={styles.input}
+        onChangeText={onChange}
+        value={text}
+      />
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => {
+          addItem(text);
+          setText("");
+        }}
+      >
+        <Text style={styles.btnText}>
+          <Icon name="plus" size={20} /> Add Item
+        </Text>
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  main: {
+  input: {
     height: 60,
-    padding: 15,
+    padding: 8,
+    margin: 5,
+  },
+  btn: {
+    backgroundColor: "#c2bad8",
+    padding: 9,
+    margin: 5,
+  },
+  btnText: {
+    color: "darkslateblue",
+    fontSize: 20,
+    textAlign: "center",
   },
 });
+
 export default AddItem;

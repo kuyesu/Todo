@@ -9,37 +9,35 @@ import ListItem from "./components/ListItem";
 import AddItem from "./components/addItem";
 
 export default function App() {
-  const [items, setItem] = useState([
+  const [items, setItems] = useState([
     { id: uuidv4(), text: "Typescript" },
     { id: uuidv4(), text: "Javascript" },
     { id: uuidv4(), text: "Python" },
     { id: uuidv4(), text: "Rust" },
   ]);
 
-  const deleteItem = (id: string) => {
-    setItem((prevItems) => {
-      return prevItems.filter((item) => item.id != id);
+  const deleteItem = (id: any) => {
+    setItems((prevItems: any[]) => {
+      return prevItems.filter((item: { id: any; }) => item.id !== id);
     });
   };
-  const addItems = (text: any) => {
-    if (text) {
-      setItem((prevItems) => {
+  const addItem = (text: any) => {
+    if (!text) {
+      Alert.alert(
+        "No item entered",
+        "Please enter an item when adding to your shopping list",
+        [
+          {
+            text: "Understood",
+            style: "cancel",
+          },
+        ],
+        { cancelable: true }
+      );
+    } else {
+      setItems((prevItems) => {
         return [{ id: uuidv4(), text }, ...prevItems];
       });
-      Alert.alert("Successful", `${text.id} added`, [
-        {
-          text: "Close",
-          style: "cancel",
-        },
-      ]);
-    } else {
-      Alert.alert("Unsuccessful", "Please add Item", [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        { text: "OK",},
-      ]);
     }
   };
   return (
@@ -51,7 +49,7 @@ export default function App() {
         renderItem={(item) => <ListItem item={item} deleteItem={deleteItem} />}
       />
       {/* add items */}
-      <AddItem addItem={addItems} />
+      <AddItem addItem={addItem} />
     </View>
   );
 }
@@ -59,8 +57,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E8EAED",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#15202b",
+    padding: 15,
   },
 });
+function uuid(): string {
+  throw new Error("Function not implemented.");
+}
